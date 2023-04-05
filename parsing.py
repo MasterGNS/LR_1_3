@@ -2,12 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 import re
 
-def file(SortPrep):
-    file = open("bebra.txt", "w")
-    for sn in SortPrep:
-        words = sn.split()
-        if words[0][0] == "Н":
-            file.write(sn.strip() + "\n")
+def filez(sn,file):
+    file.write(sn.strip() + "\n")
 
 def pars():
     url= "https://www.omgtu.ru/university/about-the-university/persons/"
@@ -20,4 +16,9 @@ def pars():
     for n in prep:
         if n.find(string = re.compile(" Н")) is not None:
             SortPrep.append(n.text)
-    file(SortPrep)
+    file = open("bebra.txt", "w")
+    for sn in SortPrep:
+        words = sn.split()
+        if words[0][0] == "Н":
+            filez(sn,file)
+    file.close()
